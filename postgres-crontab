@@ -1,4 +1,4 @@
 SHELL=/bin/bash
 BASH_ENV=/root/project_env.sh
 * * * * * root pwd
-* * * * * root /backup_scripts/backup.sh
+5 * * * * root /backup_scripts/backup.sh

@@ -13,6 +13,9 @@ fi
 
 if [[ $RUNNING_MODE = 'BACKUP' ]];
 then
+	echo "Taking base backup"
+	barman-cloud-backup -U $POSTGRES_USER -j --immediate-checkpoint s3://$BACKUP_BUCKET $SERVER_NAME
+	echo "Done base backup"
 	echo "Configuring backup"
 	# turn on bash's job control
 	set -m

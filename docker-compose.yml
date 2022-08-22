@@ -23,8 +23,8 @@ services:
       AWS_SECRET_ACCESS_KEY: EoO2zNY9A9MtCWc2sAJC3Nxga7a3VL4K3sjlsD3B
       SERVER_NAME:	postgres-db
       BACKUP_BUCKET: junctiontestbucket/jaytestdb
-      RUNNING_MODE:    BACKUP 
-      # RUNNING_MODE:  RECOVERY
+      # RUNNING_MODE:    BACKUP 
+      RUNNING_MODE:  RECOVERY
       POSTGRES_USER: jayuser
       POSTGRES_PASSWORD: jaypassword 
       
