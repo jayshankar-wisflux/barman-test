@@ -1,0 +1,39 @@
+version: '3.3'
+
+services:
+  postgres-db:
+    image: postgres
+    environment:
+      POSTGRES_USER: jayuser
+      POSTGRES_PASSWORD: jaypassword
+      POSTGRES_DB: jaydb
+    ports:
+      - '5432:5432'
+    volumes:
+      - pg_vol:/home/pg_vol
+      - barman_vol:/home/pg_vol/barmantest
+
+  barman_service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      AWS_ENDPOINT: https://junctiontestbucket.s3.ap-south-1.amazonaws.com
+      AWS_ACCESS_KEY_ID: AKIAU7QZATXO62YNEG54
+      AWS_SECRET_ACCESS_KEY: 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
+      SERVER_NAME:	postgres-db
+      BACKUP_BUCKET: junctiontestbucket/jaytestdb
+      # RUNNING_MODE:    BACKUP 
+      RUNNING_MODE:  RECOVERY
+      POSTGRES_USER: jayuser
+      POSTGRES_PASSWORD: jaypassword 
+      
+    volumes:
+      - barman_vol:/home/barman_vol
+    ports:
+      - '5433:5432'
+    depends_on:
+      - postgres-db
+volumes:
+  pg_vol:
+  barman_vol:
